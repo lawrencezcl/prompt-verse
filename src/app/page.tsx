@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Hero } from '@/components/layout/hero';
 import { FeaturedPrompts } from '@/components/prompts/featured-prompts';
-import { SearchInterface } from '@/components/search/search-interface';
+import { SearchClient } from '@/components/search/search-client';
 import { TrendingPrompts } from '@/components/prompts/trending-prompts';
 import { CategoriesGrid } from '@/components/categories/categories-grid';
 import { PlatformsShowcase } from '@/components/platforms/platforms-showcase';
@@ -51,12 +51,9 @@ export default function HomePage() {
         </Suspense>
 
         {/* Search Interface */}
-        <div className="mb-12">
-          <SearchInterface onSearch={(filters) => {
-            console.log('Search filters:', filters);
-            // TODO: Implement search functionality
-          }} />
-        </div>
+        <Suspense fallback={<LoadingSpinner />}>
+          <SearchClient />
+        </Suspense>
 
         {/* Featured Prompts */}
         <div className="mb-12">

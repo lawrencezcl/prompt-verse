@@ -29,7 +29,7 @@ const mockTrendingPrompts: Prompt[] = [
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
-    },
+    } as any,
     qualityScore: 8.9,
     difficulty: 'INTERMEDIATE' as any,
     duration: 5,
@@ -62,7 +62,7 @@ const mockTrendingPrompts: Prompt[] = [
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
-    },
+    } as any,
     qualityScore: 9.1,
     difficulty: 'ADVANCED' as any,
     duration: 12,
@@ -95,7 +95,7 @@ const mockTrendingPrompts: Prompt[] = [
       isActive: true,
       createdAt: new Date(),
       updatedAt: new Date()
-    },
+    } as any,
     qualityScore: 8.7,
     difficulty: 'BEGINNER' as any,
     duration: 8,
