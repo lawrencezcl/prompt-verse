@@ -174,17 +174,17 @@ export function FeaturedPrompts({ prompts = mockFeaturedPrompts, loading = false
   }
 
   return (
-    <section className="py-16 bg-gradient-to-b from-slate-50 to-white">
+    <section className="py-20 bg-gradient-to-b from-slate-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-amber-50 border border-amber-200">
             <Star className="h-5 w-5 text-amber-500" />
-            <span className="text-sm font-semibold text-amber-600 uppercase tracking-wide">Featured Collection</span>
+            <span className="text-sm font-semibold text-amber-700 uppercase tracking-wide">Featured Collection</span>
           </div>
-          <h2 className="text-4xl font-bold text-slate-900 mb-4">
+          <h2 className="text-5xl font-bold text-slate-900 mb-6">
             Curated Excellence
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Hand-picked prompts that deliver stunning results across all major AI video platforms
           </p>
         </div>
@@ -196,7 +196,7 @@ export function FeaturedPrompts({ prompts = mockFeaturedPrompts, loading = false
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-300 overflow-hidden"
+              className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-slate-200 shadow-modern hover:shadow-modern-lg hover:border-slate-300 transition-all duration-300 overflow-hidden hover:-translate-y-1"
             >
               {/* Gradient accent */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -278,15 +278,15 @@ export function FeaturedPrompts({ prompts = mockFeaturedPrompts, loading = false
                 <div className="flex items-center gap-2 pt-4 border-t border-slate-100">
                   <button
                     onClick={() => handleCopyPrompt(prompt.content, prompt.title)}
-                    className="flex-1 h-10 px-4 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md"
+                    className="flex-1 h-11 px-4 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex items-center justify-center gap-2 shadow-colored hover:shadow-modern-lg hover:scale-105 focus-ring"
                   >
-                    <Copy className="h-3.5 w-3.5" />
+                    <Copy className="h-4 w-4" />
                     Copy Prompt
                   </button>
-                  <button className="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all duration-200">
+                  <button className="h-11 w-11 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all duration-200 hover:scale-105 focus-ring">
                     <Play className="h-4 w-4" />
                   </button>
-                  <button className="h-10 w-10 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all duration-200">
+                  <button className="h-11 w-11 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all duration-200 hover:scale-105 focus-ring">
                     <ExternalLink className="h-4 w-4" />
                   </button>
                 </div>

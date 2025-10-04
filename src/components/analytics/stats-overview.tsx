@@ -150,18 +150,18 @@ export function StatsOverview({ stats = mockStats, loading = false }: StatsOverv
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-gray-50">
+    <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-blue-50 border border-blue-200">
             <BarChart3 className="h-5 w-5 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Analytics</span>
+            <span className="text-sm font-semibold text-blue-700 uppercase tracking-wide">Analytics</span>
           </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold text-slate-900 mb-4"
+            className="text-5xl font-bold text-slate-900 mb-6"
           >
             Platform Insights
           </motion.h2>
@@ -169,7 +169,7 @@ export function StatsOverview({ stats = mockStats, loading = false }: StatsOverv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-slate-600 max-w-2xl mx-auto"
+            className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed"
           >
             Real-time insights into our prompt collection and community engagement
           </motion.p>
@@ -192,7 +192,7 @@ export function StatsOverview({ stats = mockStats, loading = false }: StatsOverv
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="group relative bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-300 overflow-hidden"
+            className="group relative bg-white/70 backdrop-blur-md rounded-2xl border border-slate-200 p-6 shadow-modern hover:shadow-modern-lg hover:border-slate-300 transition-all duration-300 overflow-hidden hover:-translate-y-1"
           >
             {/* Gradient Accent */}
             <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${getStatColor(stat.key)} opacity-100 group-hover:opacity-100 transition-opacity duration-300`}></div>

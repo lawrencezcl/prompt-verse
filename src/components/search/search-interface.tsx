@@ -76,22 +76,22 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             placeholder="Search for video prompts... (e.g., 'cinematic drone shot', 'portrait of a woman')"
-            className="w-full h-16 pl-14 pr-40 text-base text-slate-900 bg-white border border-slate-200 rounded-xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
+            className="w-full h-16 pl-14 pr-40 text-base text-slate-900 bg-white/70 backdrop-blur-md border border-slate-200 rounded-xl shadow-modern placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 focus:bg-white"
           />
           <div className="absolute right-3 flex items-center gap-2">
             <button
               onClick={() => handleSearch()}
               disabled={loading}
-              className="h-11 px-5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-sm hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="h-11 px-5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl shadow-colored hover:from-blue-700 hover:to-blue-800 hover:shadow-modern-lg hover:scale-105 focus:ring-2 focus:ring-blue-500/20 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`relative h-11 w-11 rounded-lg border transition-all duration-200 ${
+              className={`relative h-11 w-11 rounded-xl border transition-all duration-200 hover:scale-105 ${
                 showFilters || activeFilterCount > 0
-                  ? 'border-blue-500 bg-blue-50 text-blue-600 shadow-sm'
-                  : 'border-slate-200 bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-600 shadow-sm'
+                  ? 'border-blue-500 bg-blue-50 text-blue-600 shadow-colored'
+                  : 'border-slate-200 bg-white/70 backdrop-blur-md text-slate-500 hover:bg-white/90 hover:text-slate-600 shadow-modern'
               }`}
             >
               <Sliders className="h-4 w-4" />

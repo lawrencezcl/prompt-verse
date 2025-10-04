@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Modern Light Theme Colors */
+    /* Enhanced Modern Light Theme Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -24,9 +24,9 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 217.2 91.2% 59.8%;
-    --radius: 0.75rem; /* Slightly larger radius for modern look */
+    --radius: 0.875rem; /* Larger radius for more modern look */
 
-    /* Additional modern colors */
+    /* Enhanced color palette */
     --slate-50: 210 40% 98%;
     --slate-100: 210 40% 96%;
     --slate-200: 214.3 31.8% 91.4%;
@@ -37,6 +37,38 @@
     --slate-700: 215.3 19.1% 34.1%;
     --slate-800: 215.3 25% 26.1%;
     --slate-900: 222.2 84% 4.9%;
+
+    /* Modern accent colors */
+    --blue-50: 219.6 95% 97%;
+    --blue-100: 219.6 95% 94%;
+    --blue-200: 219.6 91% 87%;
+    --blue-500: 217.2 91.2% 59.8%;
+    --blue-600: 217.2 91.2% 49.8%;
+    --blue-700: 217.2 91.2% 39.8%;
+
+    --emerald-50: 152.2 91% 97%;
+    --emerald-100: 152.2 91% 94%;
+    --emerald-200: 152.2 88% 86%;
+    --emerald-500: 149.7 82% 45%;
+    --emerald-600: 149.7 82% 35%;
+
+    --amber-50: 49.2 96% 97%;
+    --amber-100: 49.2 96% 94%;
+    --amber-200: 49.2 93% 86%;
+    --amber-500: 48.4 89% 50%;
+    --amber-600: 48.4 89% 40%;
+
+    --purple-50: 262.1 83% 97%;
+    --purple-100: 262.1 83% 94%;
+    --purple-200: 262.1 79% 86%;
+    --purple-500: 258.3 89% 56%;
+    --purple-600: 258.3 89% 46%;
+
+    --orange-50: 34.3 96% 97%;
+    --orange-100: 34.3 96% 94%;
+    --orange-200: 34.3 93% 86%;
+    --orange-500: 32.6 94% 50%;
+    --orange-600: 32.6 94% 40%;
   }
 
   .dark {
@@ -71,27 +103,37 @@
 }
 
 @layer components {
-  /* Modern light theme card styles */
+  /* Enhanced modern card styles */
   .modern-card {
-    @apply bg-white border border-slate-200 rounded-xl shadow-sm;
+    @apply bg-white border border-slate-200 rounded-2xl shadow-sm;
     @apply transition-all duration-300 ease-in-out;
-    @apply hover:shadow-lg hover:border-slate-300;
+    @apply hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5;
+    @apply backdrop-blur-sm;
   }
 
   .modern-card-elevated {
-    @apply modern-card hover:-translate-y-1;
+    @apply modern-card hover:shadow-xl hover:-translate-y-1;
   }
 
-  /* Legacy glass card for backward compatibility */
+  /* Glass morphism effects */
   .glass-card {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
+    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-lg;
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/80 shadow-xl;
   }
 
   .dark .glass-card {
-    @apply bg-gray-900/80 backdrop-blur-md border border-gray-800/20;
+    @apply bg-gray-900/70 backdrop-blur-xl border border-gray-800/30;
   }
 
-  /* Modern gradient backgrounds */
+  .dark .glass-card:hover {
+    @apply bg-gray-900/80;
+  }
+
+  /* Enhanced gradient backgrounds */
   .gradient-bg {
     @apply bg-gradient-to-br from-slate-50 via-white to-gray-50;
   }
@@ -104,6 +146,10 @@
     @apply bg-gradient-to-br from-emerald-50 via-white to-blue-50;
   }
 
+  .gradient-bg-subtle {
+    @apply bg-gradient-to-br from-gray-50 via-white to-slate-50;
+  }
+
   .dark .gradient-bg {
     @apply bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900;
   }
@@ -112,6 +158,7 @@
     @apply bg-gradient-to-br from-blue-900 via-gray-900 to-indigo-900;
   }
 
+  /* Enhanced animations */
   .floating-animation {
     @apply animate-float;
   }
@@ -126,6 +173,95 @@
 
   .text-gradient-primary {
     @apply bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-warm {
+    @apply bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-cool {
+    @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  }
+
+  /* Modern button enhancements */
+  .btn-glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/30 text-slate-700;
+    @apply hover:bg-white/90 hover:shadow-lg hover:-translate-y-0.5;
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .btn-shine {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-shine::before {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent;
+    content: '';
+    transform: translateX(-100%);
+    transition: transform 0.6s ease-out;
+  }
+
+  .btn-shine:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* Enhanced focus states */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:ring-offset-2;
+  }
+
+  .focus-ring-green {
+    @apply focus:outline-none focus:ring-4 focus:ring-emerald-500/20 focus:ring-offset-2;
+  }
+
+  .focus-ring-amber {
+    @apply focus:outline-none focus:ring-4 focus:ring-amber-500/20 focus:ring-offset-2;
+  }
+
+  /* Modern shadows */
+  .shadow-modern {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  .shadow-modern-lg {
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  .shadow-colored {
+    box-shadow: 0 4px 14px 0 rgb(59 130 246 / 0.15);
+  }
+
+  .shadow-colored-green {
+    box-shadow: 0 4px 14px 0 rgb(16 185 129 / 0.15);
+  }
+
+  .shadow-colored-amber {
+    box-shadow: 0 4px 14px 0 rgb(245 158 11 / 0.15);
+  }
+
+  /* Modern loading skeleton */
+  .skeleton-modern {
+    @apply bg-gradient-to-r from-slate-100 via-slate-50 to-slate-100;
+    @apply bg-[length:200%_100%] animate-shimmer;
+    @apply rounded-xl;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Enhanced hover states */
+  .hover-lift {
+    @apply transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-in-out hover:shadow-lg hover:shadow-blue-500/25;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 ease-in-out hover:scale-105;
   }
 }
 
