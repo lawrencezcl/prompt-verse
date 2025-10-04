@@ -1,6 +1,6 @@
 {
   "name": "prompt-verse",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The ultimate collection of AI video generation prompts",
   "private": false,
   "scripts": {
