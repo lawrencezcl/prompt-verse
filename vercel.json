@@ -25,15 +25,15 @@
   },
   "crons": [
     {
-      "path": "api/cron/collect-prompts",
+      "path": "/api/cron/collect-prompts",
       "schedule": "0 */4 * * *"
     },
     {
-      "path": "api/cron/update-trends",
+      "path": "/api/cron/update-trends",
       "schedule": "0 */6 * * *"
     },
     {
-      "path": "api/cron/cleanup-analytics",
+      "path": "/api/cron/cleanup-analytics",
       "schedule": "0 0 * * *"
     }
   ]
