@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model Prompt {
+  id              String    @id @default(cuid())
+  title           String
+  content         String
+  category        String
+  subcategory     String?
+  platformId      String
+  platform        Platform @relation("PlatformPrompts", fields: [platformId], references: [id])
+  qualityScore    Float    @default(0)
+  difficulty      Difficulty @default(BEGINNER)
+  duration        Int?     // in seconds
+  aspectRatio     String?  // e.g., "16:9", "9:16"
+  tags            String[]  @default([])
+  source          String   // source file or repository
+  isJson          Boolean  @default(false)
+  jsonData        Json?    // JSON specifications if applicable
+  rating          Float    @default(0)
+  usageCount      Int      @default(0)
+  isFeatured      Boolean  @default(false)
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([category])
+  @@index([platformId])
+  @@index([qualityScore])
+  @@index([isFeatured])
+  @@index([createdAt])
+  @@index([isActive])
+  @@map("pt_prompts")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  promptCount Int      @default(0)
+  icon        String?
+  color       String?
+  parentId    String?
+  sortOrder   Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  children    Category[] @relation("CategoryHierarchy")
+  parent      Category? @relation("CategoryHierarchy", fields: [parentId], references: [id])
+
+  @@unique([name])
+  @@map("pt_categories")
+}
+
+model Platform {
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  description       String?
+  website           String?
+  maxDuration       Int?     // in seconds
+  supportedFormats  Json?    // array of aspect ratios
+  apiAvailable      Boolean  @default(false)
+  promptCount       Int      @default(0)
+  logoUrl           String?
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  prompts           Prompt[]  @relation("PlatformPrompts")
+
+  @@unique([name])
+  @@map("pt_platforms")
+}
+
+
+model Collection {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String
+  promptIds     String[] // array of prompt IDs
+  creatorName   String
+  creatorEmail  String
+  isPublic      Boolean  @default(true)
+  isFeatured    Boolean  @default(false)
+  views         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("pt_collections")
+}
+
+model UsageAnalytics {
+  id               String   @id @default(cuid())
+  promptId         String
+  platformUsed     String?
+  searchQuery      String?
+  filtersApplied   Json?    // filters used in search
+  ipAddress        String
+  userAgent        String?
+  createdAt        DateTime @default(now())
+
+  @@index([promptId])
+  @@index([createdAt])
+  @@map("pt_usage_analytics")
+}
+
+model CronJob {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  lastRun     DateTime @default(now())
+  nextRun     DateTime
+  isActive    Boolean  @default(true)
+  metadata    Json?    // job-specific data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("pt_cron_jobs")
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum VideoPlatform {
+  RUNWAY
+  PIKA_LABS
+  SORA
+  LEONARDO_AI
+  PIXVERSE
+  HEYGEN
+  STABLE_DIFFUSION
+  KAEIBER
+  MOONVALLEY
+  REELCRAFT
+  GENMO
+  POLLO_AI
+  LUMEN5
+  INVIDEO
+  SYNTHESIA
+}
+

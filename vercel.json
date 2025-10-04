@@ -1,0 +1,40 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["sin1"],
+  "functions": {
+    "api/cron/collect-prompts/route.ts": {
+      "maxDuration": 300
+    },
+    "api/cron/update-trends/route.ts": {
+      "maxDuration": 120
+    },
+    "api/cron/cleanup-analytics/route.ts": {
+      "maxDuration": 60
+    }
+  },
+  "env": {
+    "DATABASE_URL": "postgresql://neondb_owner:npg_iSKs3vCN0bBw@ep-still-boat-a1kh6owg-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "postgresql://neondb_owner:npg_iSKs3vCN0bBw@ep-still-boat-a1kh6owg-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+    }
+  },
+  "crons": [
+    {
+      "path": "api/cron/collect-prompts",
+      "schedule": "0 */4 * * *"
+    },
+    {
+      "path": "api/cron/update-trends",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "api/cron/cleanup-analytics",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
