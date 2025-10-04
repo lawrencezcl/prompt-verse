@@ -139,11 +139,11 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty.toLowerCase()) {
-      case 'beginner': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
-      case 'intermediate': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400';
-      case 'advanced': return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400';
-      case 'expert': return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400';
+      case 'beginner': return 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+      case 'intermediate': return 'bg-amber-50 text-amber-700 border border-amber-200';
+      case 'advanced': return 'bg-orange-50 text-orange-700 border border-orange-200';
+      case 'expert': return 'bg-red-50 text-red-700 border border-red-200';
+      default: return 'bg-slate-50 text-slate-600 border border-slate-200';
     }
   };
 
@@ -157,15 +157,15 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg p-6 animate-pulse">
-            <div className="h-12 bg-gray-200 rounded w-12 mb-4"></div>
-            <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-            <div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+          <div key={i} className="bg-white rounded-xl border border-slate-200 p-6 animate-pulse shadow-sm">
+            <div className="h-12 bg-slate-200 rounded-xl w-12 mb-4"></div>
+            <div className="h-6 bg-slate-200 rounded w-3/4 mb-2"></div>
+            <div className="h-4 bg-slate-200 rounded w-full mb-4"></div>
             <div className="flex gap-2 mb-4">
-              <div className="h-3 bg-gray-200 rounded w-16"></div>
-              <div className="h-3 bg-gray-200 rounded w-20"></div>
+              <div className="h-3 bg-slate-200 rounded w-16"></div>
+              <div className="h-3 bg-slate-200 rounded w-20"></div>
             </div>
-            <div className="h-8 bg-gray-200 rounded w-full"></div>
+            <div className="h-8 bg-slate-200 rounded w-full"></div>
           </div>
         ))}
       </div>
@@ -173,16 +173,29 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
   }
 
   return (
-    <section className="py-12 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-2xl">
+    <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Supported Platforms
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <Play className="h-5 w-5 text-blue-600" />
+            <span className="text-sm font-semibold text-blue-600 uppercase tracking-wide">Platforms</span>
+          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl font-bold text-slate-900 mb-4"
+          >
+            AI Video Platforms
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-lg text-slate-600 max-w-2xl mx-auto"
+          >
             Professional prompts optimized for all major AI video generation platforms
-          </p>
+          </motion.p>
         </div>
 
         {/* Platform Cards Grid */}
@@ -197,54 +210,52 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
               onMouseEnter={() => setSelectedPlatform(platform.id)}
               onMouseLeave={() => setSelectedPlatform(null)}
             >
-              <div className={`glass-card p-6 h-full card-hover relative overflow-hidden ${
-                selectedPlatform === platform.id ? 'ring-2 ring-primary/50' : ''
-              }`}>
-                {/* Gradient Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${platform.color} opacity-0 group-hover:opacity-5 rounded-lg transition-opacity duration-300`}></div>
+              <div className="relative h-full bg-white rounded-xl border border-slate-200 p-6 shadow-sm hover:shadow-lg hover:border-slate-300 transition-all duration-300 overflow-hidden group">
+                {/* Gradient Accent */}
+                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${platform.color} opacity-100 group-hover:opacity-100 transition-opacity duration-300`}></div>
 
                 {/* Platform Header */}
-                <div className="flex items-start justify-between mb-4 relative">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${platform.color} flex items-center justify-center text-white font-bold text-lg`}>
+                <div className="flex items-start justify-between mb-5">
+                  <div className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${platform.color} flex items-center justify-center text-white font-bold text-xl shadow-sm group-hover:scale-110 transition-transform duration-300`}>
                       {platform.name.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                         {platform.name}
                       </h3>
-                      <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-                        <span className="flex items-center gap-1">
-                          <Star className="h-3 w-3 fill-current" />
-                          {platform.rating}
-                        </span>
-                        <span>•</span>
+                      <div className="flex items-center gap-3 text-sm text-slate-600">
+                        <div className="flex items-center gap-1.5">
+                          <Star className="h-4 w-4 text-amber-500 fill-current" />
+                          <span className="font-semibold">{platform.rating}</span>
+                        </div>
+                        <div className="w-1 h-1 rounded-full bg-slate-300"></div>
                         <span>{platform.promptCount.toLocaleString()} prompts</span>
                       </div>
                     </div>
                   </div>
-                  <span className={`text-xs px-2 py-1 rounded-full font-medium ${getDifficultyColor(platform.difficulty)}`}>
+                  <span className={`text-xs px-3 py-1.5 rounded-full font-medium border ${getDifficultyColor(platform.difficulty)}`}>
                     {platform.difficulty}
                   </span>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                <p className="text-slate-600 text-sm leading-relaxed mb-5 line-clamp-2">
                   {platform.description}
                 </p>
 
                 {/* Key Features */}
-                <div className="mb-4">
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-2">Key Features</div>
-                  <div className="flex flex-wrap gap-1">
+                <div className="mb-5">
+                  <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">Key Features</div>
+                  <div className="flex flex-wrap gap-2">
                     {platform.features.slice(0, 3).map((feature, idx) => (
-                      <span key={idx} className="flex items-center gap-1 text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded dark:bg-gray-800 dark:text-gray-300">
+                      <span key={idx} className="flex items-center gap-1.5 text-xs bg-slate-50 text-slate-700 px-3 py-2 rounded-lg border border-slate-200">
                         {getFeatureIcon(feature)}
                         {feature}
                       </span>
                     ))}
                     {platform.features.length > 3 && (
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-slate-400 px-3 py-2 rounded-lg bg-slate-50">
                         +{platform.features.length - 3} more
                       </span>
                     )}
@@ -252,19 +263,29 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
                 </div>
 
                 {/* Specs */}
-                <div className="grid grid-cols-2 gap-2 text-xs text-gray-600 dark:text-gray-400 mb-4">
-                  <div>
-                    <span className="font-medium">Max Duration:</span> {platform.maxDuration}s
+                <div className="grid grid-cols-2 gap-4 text-sm text-slate-600 mb-5">
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-blue-500" />
+                    <div>
+                      <div className="font-semibold text-slate-900">{platform.maxDuration}s</div>
+                      <div className="text-xs text-slate-500">Max Duration</div>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-medium">API:</span> {platform.apiAvailable ? '✅ Available' : '❌ Unavailable'}
+                  <div className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-emerald-500" />
+                    <div>
+                      <div className="font-semibold text-slate-900">
+                        {platform.apiAvailable ? 'Available' : 'Limited'}
+                      </div>
+                      <div className="text-xs text-slate-500">API Access</div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                  <button className="flex-1 btn-primary text-sm py-2 flex items-center justify-center gap-2">
-                    <Play className="h-3 w-3" />
+                <div className="flex items-center gap-3 pt-5 border-t border-slate-100">
+                  <button className="flex-1 h-11 px-4 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
+                    <Play className="h-4 w-4" />
                     Try Prompts
                   </button>
                   {platform.website && (
@@ -272,70 +293,82 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
                       href={platform.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 transition-colors"
+                      className="h-11 w-11 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all duration-200"
                     >
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   )}
                 </div>
-
-                {/* Hover Effect */}
-                {selectedPlatform === platform.id && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg pointer-events-none"
-                  />
-                )}
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Platform Comparison */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+        <div className="bg-white rounded-xl border border-slate-200 p-8 shadow-sm">
+          <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600">
+              <Play className="h-4 w-4" />
+            </div>
             Platform Comparison
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200 dark:border-gray-700">
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Platform</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Max Duration</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">API Access</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Quality</th>
-                  <th className="text-left py-3 px-4 font-medium text-gray-900 dark:text-white">Best For</th>
+                <tr className="border-b border-slate-200">
+                  <th className="text-left py-4 px-4 font-semibold text-slate-900">Platform</th>
+                  <th className="text-left py-4 px-4 font-semibold text-slate-900">Max Duration</th>
+                  <th className="text-left py-4 px-4 font-semibold text-slate-900">API Access</th>
+                  <th className="text-left py-4 px-4 font-semibold text-slate-900">Quality</th>
+                  <th className="text-left py-4 px-4 font-semibold text-slate-900">Best For</th>
                 </tr>
               </thead>
               <tbody>
                 {platforms.slice(0, 4).map((platform) => (
-                  <tr key={platform.id} className="border-b border-gray-100 dark:border-gray-700">
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-6 h-6 rounded bg-gradient-to-br ${platform.color} flex items-center justify-center text-white text-xs font-bold`}>
+                  <tr key={platform.id} className="border-b border-slate-100 hover:bg-slate-50 transition-colors duration-150">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${platform.color} flex items-center justify-center text-white text-sm font-bold shadow-sm`}>
                           {platform.name.charAt(0)}
                         </div>
-                        <span className="font-medium">{platform.name}</span>
+                        <div>
+                          <div className="font-semibold text-slate-900">{platform.name}</div>
+                          <div className="text-xs text-slate-500">{platform.promptCount.toLocaleString()} prompts</div>
+                        </div>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{platform.maxDuration}s</td>
-                    <td className="py-3 px-4">
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-2">
+                        <Zap className="h-4 w-4 text-blue-500" />
+                        <span className="font-medium text-slate-900">{platform.maxDuration}s</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-4">
                       {platform.apiAvailable ? (
-                        <span className="text-green-600 dark:text-green-400">✅ Available</span>
+                        <div className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-emerald-500" />
+                          <span className="font-medium text-emerald-700">Available</span>
+                        </div>
                       ) : (
-                        <span className="text-gray-400">❌ Limited</span>
+                        <div className="flex items-center gap-2">
+                          <Shield className="h-4 w-4 text-slate-400" />
+                          <span className="font-medium text-slate-500">Limited</span>
+                        </div>
                       )}
                     </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-1">
-                        <span className="text-yellow-500">{'★'.repeat(Math.floor(platform.rating))}</span>
-                        <span className="text-gray-400">{'☆'.repeat(5 - Math.floor(platform.rating))}</span>
-                        <span className="text-xs text-gray-500 ml-1">{platform.rating}</span>
+                    <td className="py-4 px-4">
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center">
+                          <span className="text-amber-500">{'★'.repeat(Math.floor(platform.rating))}</span>
+                          <span className="text-slate-300">{'☆'.repeat(5 - Math.floor(platform.rating))}</span>
+                        </div>
+                        <span className="font-semibold text-slate-900">{platform.rating}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-gray-600 dark:text-gray-400">
-                      {platform.features[0]}
+                    <td className="py-4 px-4">
+                      <span className="px-3 py-1 bg-slate-50 text-slate-700 rounded-lg border border-slate-200 text-xs font-medium">
+                        {platform.features[0]}
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -345,11 +378,17 @@ export function PlatformsShowcase({ platforms = platformData, loading = false }:
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-8">
-          <button className="btn-primary px-8 py-3 flex items-center gap-2 mx-auto">
+        <div className="text-center mt-12">
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full font-medium hover:from-blue-700 hover:to-blue-800 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
+          >
+            <Play className="w-5 h-5" />
             View All Platform Guides
-            <ArrowRight className="h-4 w-4" />
-          </button>
+            <ArrowRight className="w-4 h-4" />
+          </motion.button>
         </div>
       </div>
     </section>

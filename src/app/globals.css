@@ -4,26 +4,39 @@
 
 @layer base {
   :root {
+    /* Modern Light Theme Colors */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 84% 4.9%;
+    --primary: 217.2 91.2% 59.8%; /* Modern blue */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 98%;
     --secondary-foreground: 222.2 84% 4.9%;
     --muted: 210 40% 98%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 98%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent: 217.2 91.2% 59.8%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --ring: 217.2 91.2% 59.8%;
+    --radius: 0.75rem; /* Slightly larger radius for modern look */
+
+    /* Additional modern colors */
+    --slate-50: 210 40% 98%;
+    --slate-100: 210 40% 96%;
+    --slate-200: 214.3 31.8% 91.4%;
+    --slate-300: 213 27% 84%;
+    --slate-400: 215.4 16.3% 46.9%;
+    --slate-500: 217.2 32.6% 17.5%;
+    --slate-600: 215.4 16.3% 46.9%;
+    --slate-700: 215.3 19.1% 34.1%;
+    --slate-800: 215.3 25% 26.1%;
+    --slate-900: 222.2 84% 4.9%;
   }
 
   .dark {
@@ -58,6 +71,18 @@
 }
 
 @layer components {
+  /* Modern light theme card styles */
+  .modern-card {
+    @apply bg-white border border-slate-200 rounded-xl shadow-sm;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:border-slate-300;
+  }
+
+  .modern-card-elevated {
+    @apply modern-card hover:-translate-y-1;
+  }
+
+  /* Legacy glass card for backward compatibility */
   .glass-card {
     @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
   }
@@ -66,12 +91,25 @@
     @apply bg-gray-900/80 backdrop-blur-md border border-gray-800/20;
   }
 
+  /* Modern gradient backgrounds */
   .gradient-bg {
-    @apply bg-gradient-to-br from-indigo-50 via-white to-purple-50;
+    @apply bg-gradient-to-br from-slate-50 via-white to-gray-50;
+  }
+
+  .gradient-bg-hero {
+    @apply bg-gradient-to-br from-blue-50 via-white to-indigo-50;
+  }
+
+  .gradient-bg-accent {
+    @apply bg-gradient-to-br from-emerald-50 via-white to-blue-50;
   }
 
   .dark .gradient-bg {
     @apply bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900;
+  }
+
+  .dark .gradient-bg-hero {
+    @apply bg-gradient-to-br from-blue-900 via-gray-900 to-indigo-900;
   }
 
   .floating-animation {
@@ -79,7 +117,15 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent;
   }
 }
 
@@ -190,11 +236,32 @@
 
   /* Card hover effects */
   .card-hover {
-    @apply transition-all duration-200 ease-in-out;
+    @apply transition-all duration-300 ease-in-out;
   }
 
   .card-hover:hover {
     @apply transform -translate-y-1 shadow-lg;
+  }
+
+  /* Modern button styles */
+  .btn-modern {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-6 py-3 rounded-xl font-medium;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-modern-primary {
+    @apply btn-modern bg-gradient-to-r from-blue-600 to-blue-700 text-white;
+    @apply hover:from-blue-700 hover:to-blue-800 hover:shadow-lg hover:-translate-y-0.5;
+    @apply focus:ring-blue-500;
+  }
+
+  .btn-modern-secondary {
+    @apply btn-modern bg-white text-slate-700 border border-slate-200;
+    @apply hover:bg-slate-50 hover:border-slate-300 hover:shadow-md;
+    @apply focus:ring-slate-500;
   }
 
   /* Button styles */
@@ -251,25 +318,49 @@
     @apply text-yellow-500;
   }
 
-  /* Badge styles */
+  /* Modern badge styles */
   .badge {
-    @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+    @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium;
     @apply bg-primary text-primary-foreground;
+    @apply transition-colors duration-200 ease-in-out;
   }
 
-  .badge.secondary {
-    @apply bg-secondary text-secondary-foreground;
+  .badge-secondary {
+    @apply bg-slate-100 text-slate-700 border border-slate-200;
   }
 
-  .badge.success {
-    @apply bg-green-500 text-white;
+  .badge-success {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
   }
 
-  .badge.warning {
-    @apply bg-yellow-500 text-white;
+  .badge-warning {
+    @apply bg-amber-50 text-amber-700 border border-amber-200;
   }
 
-  .badge.danger {
-    @apply bg-red-500 text-white;
+  .badge-danger {
+    @apply bg-red-50 text-red-700 border border-red-200;
+  }
+
+  .badge-info {
+    @apply bg-blue-50 text-blue-700 border border-blue-200;
+  }
+
+  /* Modern stat card styles */
+  .stat-card {
+    @apply bg-white rounded-xl border border-slate-200 p-6 shadow-sm;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:border-slate-300;
+    @apply group relative overflow-hidden;
+  }
+
+  .stat-card::before {
+    @apply absolute top-0 left-0 right-0 h-1 bg-gradient-to-r;
+    content: '';
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .stat-card:hover::before {
+    opacity: 1;
   }
 }

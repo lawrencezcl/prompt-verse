@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Filter, X, ChevronDown, Sparkles, TrendingUp } from 'lucide-react';
+import { Search, Filter, X, ChevronDown, Sparkles, TrendingUp, Sliders, Zap, Star } from 'lucide-react';
 import { PLATFORMS, Difficulty, SearchFilters } from '@/types';
 
 interface SearchInterfaceProps {
@@ -23,6 +23,7 @@ const aspectRatios = ['16:9', '9:16', '1:1', '4:3', '21:9'];
 export function SearchInterface({ onSearch, loading = false }: SearchInterfaceProps) {
   const [query, setQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const [activeSuggestion, setActiveSuggestion] = useState<string | null>(null);
   const [filters, setFilters] = useState<SearchFilters>({
     query: '',
     sortBy: 'relevance',
@@ -36,6 +37,7 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
     };
     setFilters(finalFilters);
     onSearch(finalFilters);
+    setActiveSuggestion(null);
   };
 
   const handleFilterChange = (key: keyof SearchFilters, value: any) => {
@@ -67,34 +69,34 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
       {/* Main Search Bar */}
       <div className="relative">
         <div className="relative flex items-center">
-          <Search className="absolute left-4 h-5 w-5 text-gray-400" />
+          <Search className="absolute left-5 h-5 w-5 text-slate-400" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
             placeholder="Search for video prompts... (e.g., 'cinematic drone shot', 'portrait of a woman')"
-            className="search-input pl-12 pr-32 h-14 text-lg"
+            className="w-full h-16 pl-14 pr-40 text-base text-slate-900 bg-white border border-slate-200 rounded-xl shadow-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
           />
-          <div className="absolute right-2 flex items-center gap-2">
+          <div className="absolute right-3 flex items-center gap-2">
             <button
               onClick={() => handleSearch()}
               disabled={loading}
-              className="btn-primary h-10 px-4 text-sm disabled:opacity-50"
+              className="h-11 px-5 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-sm hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               {loading ? 'Searching...' : 'Search'}
             </button>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`relative h-10 w-10 rounded-lg border transition-colors ${
+              className={`relative h-11 w-11 rounded-lg border transition-all duration-200 ${
                 showFilters || activeFilterCount > 0
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-gray-200 bg-white text-gray-600 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400'
+                  ? 'border-blue-500 bg-blue-50 text-blue-600 shadow-sm'
+                  : 'border-slate-200 bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-600 shadow-sm'
               }`}
             >
-              <Filter className="h-4 w-4" />
+              <Sliders className="h-4 w-4" />
               {activeFilterCount > 0 && (
-                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-blue-600 text-xs text-white flex items-center justify-center font-medium">
                   {activeFilterCount}
                 </span>
               )}
@@ -104,10 +106,10 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
         {/* Quick Suggestions */}
         {query.length > 0 && query.length < 3 && (
-          <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700 z-10">
-            <div className="p-3">
-              <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                <Sparkles className="h-4 w-4" />
+          <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-xl border border-slate-200 shadow-lg z-10">
+            <div className="p-4">
+              <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
+                <Zap className="h-4 w-4" />
                 Popular searches
               </div>
               <div className="flex flex-wrap gap-2">
@@ -118,7 +120,11 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                       setQuery(suggestion);
                       handleSearch(suggestion);
                     }}
-                    className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-md transition-colors"
+                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      activeSuggestion === suggestion
+                        ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                        : 'bg-slate-50 text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900'
+                    }`}
                   >
                     {suggestion}
                   </button>
@@ -139,14 +145,14 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="mt-4 bg-white rounded-lg border border-gray-200 shadow-lg dark:bg-gray-800 dark:border-gray-700">
+            <div className="mt-4 bg-white rounded-xl border border-slate-200 shadow-lg">
               <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Advanced Filters</h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-semibold text-slate-900">Advanced Filters</h3>
                   {activeFilterCount > 0 && (
                     <button
                       onClick={clearFilters}
-                      className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 flex items-center gap-1"
+                      className="text-sm text-slate-500 hover:text-slate-700 flex items-center gap-1 transition-colors duration-200"
                     >
                       <X className="h-4 w-4" />
                       Clear All
@@ -157,13 +163,13 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {/* Platform Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Platform
                     </label>
                     <select
                       value={filters.platform || ''}
                       onChange={(e) => handleFilterChange('platform', e.target.value || undefined)}
-                      className="search-input"
+                      className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                     >
                       <option value="">All Platforms</option>
                       {platforms.map((platform) => (
@@ -176,13 +182,13 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
                   {/* Category Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Category
                     </label>
                     <select
                       value={filters.category || ''}
                       onChange={(e) => handleFilterChange('category', e.target.value || undefined)}
-                      className="search-input"
+                      className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                     >
                       <option value="">All Categories</option>
                       {categories.map((category) => (
@@ -195,13 +201,13 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
                   {/* Difficulty Filter */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Difficulty
                     </label>
                     <select
                       value={filters.difficulty || ''}
                       onChange={(e) => handleFilterChange('difficulty', e.target.value || undefined)}
-                      className="search-input"
+                      className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                     >
                       <option value="">All Levels</option>
                       {difficulties.map((difficulty) => (
@@ -214,7 +220,7 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
                   {/* Quality Range */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Quality Score
                     </label>
                     <div className="flex items-center gap-2">
@@ -226,9 +232,9 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                         value={filters.minQuality || ''}
                         onChange={(e) => handleFilterChange('minQuality', e.target.value ? parseFloat(e.target.value) : undefined)}
                         placeholder="Min"
-                        className="search-input w-20"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       />
-                      <span className="text-gray-500">to</span>
+                      <span className="text-slate-500 text-sm font-medium">to</span>
                       <input
                         type="number"
                         min="0"
@@ -237,14 +243,14 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                         value={filters.maxQuality || ''}
                         onChange={(e) => handleFilterChange('maxQuality', e.target.value ? parseFloat(e.target.value) : undefined)}
                         placeholder="Max"
-                        className="search-input w-20"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       />
                     </div>
                   </div>
 
                   {/* Duration Range */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Duration (seconds)
                     </label>
                     <div className="flex items-center gap-2">
@@ -254,29 +260,29 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                         value={filters.minDuration || ''}
                         onChange={(e) => handleFilterChange('minDuration', e.target.value ? parseInt(e.target.value) : undefined)}
                         placeholder="Min"
-                        className="search-input w-20"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       />
-                      <span className="text-gray-500">to</span>
+                      <span className="text-slate-500 text-sm font-medium">to</span>
                       <input
                         type="number"
                         min="1"
                         value={filters.maxDuration || ''}
                         onChange={(e) => handleFilterChange('maxDuration', e.target.value ? parseInt(e.target.value) : undefined)}
                         placeholder="Max"
-                        className="search-input w-20"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       />
                     </div>
                   </div>
 
                   {/* Aspect Ratio */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    <label className="block text-sm font-medium text-slate-700 mb-2">
                       Aspect Ratio
                     </label>
                     <select
                       value={filters.aspectRatio || ''}
                       onChange={(e) => handleFilterChange('aspectRatio', e.target.value || undefined)}
-                      className="search-input"
+                      className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                     >
                       <option value="">All Ratios</option>
                       {aspectRatios.map((ratio) => (
@@ -289,16 +295,16 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                 </div>
 
                 {/* Sort Options */}
-                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div className="mt-8 pt-6 border-t border-slate-200">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
                         Sort By
                       </label>
                       <select
                         value={filters.sortBy}
                         onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                        className="search-input"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       >
                         <option value="relevance">Relevance</option>
                         <option value="rating">Rating</option>
@@ -307,13 +313,13 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-slate-700 mb-2">
                         Sort Order
                       </label>
                       <select
                         value={filters.sortOrder}
                         onChange={(e) => handleFilterChange('sortOrder', e.target.value)}
-                        className="search-input"
+                        className="w-full px-3 py-2 text-sm text-slate-900 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200"
                       >
                         <option value="desc">Descending</option>
                         <option value="asc">Ascending</option>
@@ -324,14 +330,14 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
                 {/* Featured Toggle */}
                 <div className="mt-6">
-                  <label className="flex items-center gap-3 cursor-pointer">
+                  <label className="flex items-center gap-3 cursor-pointer group">
                     <input
                       type="checkbox"
                       checked={filters.isFeatured || false}
                       onChange={(e) => handleFilterChange('isFeatured', e.target.checked)}
-                      className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded transition-colors duration-200"
                     />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="text-sm font-medium text-slate-700 group-hover:text-slate-900 transition-colors duration-200">
                       Show only featured prompts
                     </span>
                   </label>
@@ -344,39 +350,39 @@ export function SearchInterface({ onSearch, loading = false }: SearchInterfacePr
 
       {/* Active Filters Display */}
       {activeFilterCount > 0 && (
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap gap-3">
           {filters.platform && (
-            <span className="tag flex items-center gap-1">
-              Platform: {filters.platform.replace('_', ' ')}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg group">
+              <span className="text-sm font-medium">Platform: {filters.platform.replace('_', ' ')}</span>
               <button
                 onClick={() => handleFilterChange('platform', undefined)}
-                className="ml-1 hover:text-primary"
+                className="hover:text-blue-900 transition-colors duration-200"
               >
                 <X className="h-3 w-3" />
               </button>
-            </span>
+            </div>
           )}
           {filters.category && (
-            <span className="tag flex items-center gap-1">
-              Category: {filters.category}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-700 border border-purple-200 rounded-lg group">
+              <span className="text-sm font-medium">Category: {filters.category}</span>
               <button
                 onClick={() => handleFilterChange('category', undefined)}
-                className="ml-1 hover:text-primary"
+                className="hover:text-purple-900 transition-colors duration-200"
               >
                 <X className="h-3 w-3" />
               </button>
-            </span>
+            </div>
           )}
           {filters.difficulty && (
-            <span className="tag flex items-center gap-1">
-              Level: {filters.difficulty.charAt(0) + filters.difficulty.slice(1).toLowerCase()}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-50 text-green-700 border border-green-200 rounded-lg group">
+              <span className="text-sm font-medium">Level: {filters.difficulty.charAt(0) + filters.difficulty.slice(1).toLowerCase()}</span>
               <button
                 onClick={() => handleFilterChange('difficulty', undefined)}
-                className="ml-1 hover:text-primary"
+                className="hover:text-green-900 transition-colors duration-200"
               >
                 <X className="h-3 w-3" />
               </button>
-            </span>
+            </div>
           )}
         </div>
       )}

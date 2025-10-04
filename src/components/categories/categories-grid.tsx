@@ -152,29 +152,33 @@ export function CategoriesGrid({ categories = mockCategories, loading }: Categor
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   return (
-    <section className="py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <Grid3X3 className="h-5 w-5 text-indigo-600" />
+            <span className="text-sm font-semibold text-indigo-600 uppercase tracking-wide">Categories</span>
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl font-bold text-gray-900 dark:text-white mb-4"
+            className="text-4xl font-bold text-slate-900 mb-4"
           >
-            Explore Categories
+            Explore by Theme
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-lg text-slate-600 max-w-2xl mx-auto"
           >
-            Browse our curated collection of AI video prompts organized by theme and style
+            Browse our curated collection of AI video prompts organized by style and theme
           </motion.p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {categories.map((category, index) => {
             const IconComponent = category.icon;
 
@@ -186,68 +190,67 @@ export function CategoriesGrid({ categories = mockCategories, loading }: Categor
                 transition={{ delay: index * 0.1 }}
                 onMouseEnter={() => setHoveredCategory(category.id)}
                 onMouseLeave={() => setHoveredCategory(null)}
-                className="relative group"
+                className="group"
               >
-                <div className={`relative h-48 rounded-2xl bg-gradient-to-br ${category.color} p-6 overflow-hidden cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl`}>
-                  {/* Background Pattern */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0" style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23ffffff" fill-opacity="0.4"%3E%3Cpath d="M0 0h20v20H0V0zm10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14z"/%3E%3C/g%3E%3C/svg%3E")`,
-                    }} />
-                  </div>
+                <div className="relative h-56 bg-white rounded-xl border border-slate-200 p-6 overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-lg hover:border-slate-300 hover:-translate-y-1">
+                  {/* Gradient Accent */}
+                  <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${category.color} opacity-100 group-hover:opacity-100 transition-opacity duration-300`}></div>
+
+                  {/* Icon Background */}
+                  <div className={`absolute -top-4 -right-4 w-20 h-20 rounded-full bg-gradient-to-br ${category.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}></div>
 
                   {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between mb-3">
-                        <div className={`w-10 h-10 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center text-white group-hover:scale-110 transition-transform`}>
-                          <IconComponent className="w-5 h-5" />
-                        </div>
-                        <span className="text-white/80 text-sm font-medium">
-                          {category.promptCount.toLocaleString()} prompts
-                        </span>
+                  <div className="relative h-full flex flex-col">
+                    {/* Icon and Count */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} p-3 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300`}>
+                        <IconComponent className="w-6 h-6" />
                       </div>
-
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {category.name}
-                      </h3>
+                      <div className="text-right">
+                        <div className="text-2xl font-bold text-slate-900">
+                          {category.promptCount.toLocaleString()}
+                        </div>
+                        <div className="text-xs text-slate-500 font-medium">
+                          prompts
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <p className="text-white/80 text-sm line-clamp-2">
-                        {category.description}
-                      </p>
-                      <div className={`w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0`}>
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors duration-200">
+                      {category.name}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-2 mb-auto">
+                      {category.description}
+                    </p>
+
+                    {/* Hover Arrow */}
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
+                      <div className="text-xs text-slate-400 font-medium">
+                        Explore category
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-all duration-300 transform translate-x-1 group-hover:translate-x-0">
                         <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
                   </div>
-
-                  {/* Hover Effect */}
-                  {hoveredCategory === category.id && (
-                    <motion.div
-                      layoutId="categoryHover"
-                      className="absolute inset-0 bg-white/10 backdrop-blur-sm rounded-2xl"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    />
-                  )}
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        {/* View All Button */}
-        <div className="text-center mt-12">
+          {/* View All Button */}
+        <div className="text-center mt-16">
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
-            className="inline-flex items-center px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-medium hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5"
           >
-            <Grid3X3 className="w-4 h-4 mr-2" />
+            <Grid3X3 className="w-5 h-5" />
             View All Categories
           </motion.button>
         </div>

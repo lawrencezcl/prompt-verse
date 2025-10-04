@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Sparkles, ArrowRight, Play, BarChart3 } from 'lucide-react';
+import { Search, Sparkles, ArrowRight, Play, BarChart3, Zap, Filter, Star } from 'lucide-react';
 
 export function Hero() {
   const [email, setEmail] = useState('');
@@ -15,166 +15,200 @@ export function Hero() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-gray-900 dark:via-purple-900 dark:to-gray-900">
-      {/* Background decoration */}
+    <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-gray-50">
+      {/* Modern subtle background patterns */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-gradient-to-br from-primary/20 to-purple-500/20 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-gradient-to-tr from-secondary/20 to-indigo-500/20 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-100/20 via-transparent to-transparent" />
+        <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-blue-100/30 blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-purple-100/30 blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 h-64 w-64 rounded-full bg-pink-100/20 blur-2xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+      <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
         <div className="text-center">
-          {/* Badge */}
+          {/* Modern badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm"
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 backdrop-blur-sm shadow-sm"
           >
-            <Sparkles className="h-4 w-4" />
+            <Sparkles className="h-4 w-4 text-blue-600" />
             15,100+ Professional AI Video Prompts
+            <span className="ml-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-700">New</span>
           </motion.div>
 
-          {/* Heading */}
+          {/* Modern typography */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-6 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl"
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 text-5xl font-bold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl"
           >
-            <span className="block">Ultimate AI Video</span>
-            <span className="block text-gradient">Prompt Collection</span>
+            <span className="block text-slate-900">Create Stunning</span>
+            <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              AI Videos
+            </span>
+            <span className="block text-slate-900">with Perfect Prompts</span>
           </motion.h1>
 
-          {/* Description */}
+          {/* Enhanced description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600 dark:text-gray-300"
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto mt-6 max-w-3xl text-xl text-slate-600 leading-relaxed sm:text-2xl"
           >
-            Discover 15,100+ professionally curated text-to-video prompts for Runway, Pika Labs, Sora,
-            Leonardo.ai, and more. Search, filter, and create stunning AI-generated videos with the best prompts.
+            Access the world's largest collection of professionally curated AI video prompts.
+            Transform your ideas into breathtaking videos with prompts that actually work.
           </motion.p>
 
-          {/* Stats */}
+          {/* Modern stats cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-6"
           >
-            <div className="rounded-lg bg-white/80 p-4 backdrop-blur-sm dark:bg-gray-800/80">
-              <div className="text-2xl font-bold text-primary">15,100+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Prompts</div>
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-100 mb-3 mx-auto">
+                  <Zap className="h-6 w-6 text-blue-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900">15,100+</div>
+                <div className="text-sm text-slate-600 font-medium">Premium Prompts</div>
+              </div>
             </div>
-            <div className="rounded-lg bg-white/80 p-4 backdrop-blur-sm dark:bg-gray-800/80">
-              <div className="text-2xl font-bold text-secondary">45+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Categories</div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-purple-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-purple-100 mb-3 mx-auto">
+                  <Filter className="h-6 w-6 text-purple-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900">45+</div>
+                <div className="text-sm text-slate-600 font-medium">Categories</div>
+              </div>
             </div>
-            <div className="rounded-lg bg-white/80 p-4 backdrop-blur-sm dark:bg-gray-800/80">
-              <div className="text-2xl font-bold text-accent">16</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Platforms</div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-green-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-green-100 mb-3 mx-auto">
+                  <Star className="h-6 w-6 text-green-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900">16</div>
+                <div className="text-sm text-slate-600 font-medium">Platforms</div>
+              </div>
             </div>
-            <div className="rounded-lg bg-white/80 p-4 backdrop-blur-sm dark:bg-gray-800/80">
-              <div className="text-2xl font-bold text-primary">4.8★</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Avg Rating</div>
+
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-orange-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-orange-100 mb-3 mx-auto">
+                  <BarChart3 className="h-6 w-6 text-orange-600" />
+                </div>
+                <div className="text-3xl font-bold text-slate-900">4.8★</div>
+                <div className="text-sm text-slate-600 font-medium">Avg Rating</div>
+              </div>
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* Modern CTA buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
           >
-            <button className="btn-primary group flex items-center gap-2 px-8 py-3 text-lg">
+            <button className="group relative inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/25">
               <Search className="h-5 w-5" />
               Explore Prompts
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
-            <button className="btn-secondary group flex items-center gap-2 px-8 py-3 text-lg">
+            <button className="group inline-flex items-center gap-2 rounded-full border-2 border-slate-300 bg-white px-8 py-4 text-lg font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:border-slate-400 hover:bg-slate-50 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-slate-500/25">
               <Play className="h-5 w-5" />
               Watch Demo
             </button>
           </motion.div>
 
-          {/* Newsletter Signup */}
+          {/* Modern newsletter signup */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mt-12"
           >
-            <div className="mx-auto max-w-md">
-              <form onSubmit={handleSubscribe} className="flex gap-2">
+            <div className="mx-auto max-w-xl">
+              <form onSubmit={handleSubscribe} className="flex gap-3">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email for updates"
-                  className="search-input flex-1"
+                  placeholder="Enter your email for weekly prompt updates"
+                  className="flex-1 rounded-full border border-slate-300 bg-white/80 px-6 py-4 text-slate-900 placeholder-slate-500 backdrop-blur-sm shadow-sm transition-all duration-300 focus:border-blue-500 focus:bg-white focus:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500/25"
                   required
                 />
-                <button type="submit" className="btn-primary px-6 py-3">
+                <button type="submit" className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-500/25">
                   Subscribe
                 </button>
               </form>
               {isSubscribed && (
-                <p className="mt-2 text-sm text-green-600 dark:text-green-400">
-                  ✓ Successfully subscribed!
-                </p>
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-3 text-sm font-medium text-green-600"
+                >
+                  ✓ Successfully subscribed! Check your email for confirmation.
+                </motion.p>
               )}
             </div>
           </motion.div>
 
-          {/* Feature highlights */}
+          {/* Enhanced feature highlights */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3"
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-20 grid grid-cols-1 gap-6 sm:grid-cols-3 lg:gap-8"
           >
-            <div className="glass-card p-6 text-left">
-              <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-primary/10 p-2">
-                  <Search className="h-6 w-6 text-primary" />
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-blue-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-100 mb-4 mx-auto">
+                  <Search className="h-7 w-7 text-blue-600" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Smart Search</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Filter by platform, category, quality, and more
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Smart Search</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Advanced filtering by platform, category, quality score, and more. Find exactly what you need in seconds.
+                </p>
               </div>
             </div>
 
-            <div className="glass-card p-6 text-left">
-              <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-secondary/10 p-2">
-                  <BarChart3 className="h-6 w-6 text-secondary" />
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-purple-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-100 mb-4 mx-auto">
+                  <BarChart3 className="h-7 w-7 text-purple-600" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Trending Insights</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Discover what's popular and working best
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Trending Insights</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Real-time analytics showing what's popular and working best. Stay ahead with trending prompts and techniques.
+                </p>
               </div>
             </div>
 
-            <div className="glass-card p-6 text-left">
-              <div className="flex items-center gap-3">
-                <div className="rounded-lg bg-accent/10 p-2">
-                  <Sparkles className="h-6 w-6 text-accent" />
+            <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-green-200">
+              <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-green-100 mb-4 mx-auto">
+                  <Sparkles className="h-7 w-7 text-green-600" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">Expert Curated</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Professional prompts tested and optimized
-                  </p>
-                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Expert Curated</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  Every prompt is professionally tested and optimized. Get consistent, high-quality results every time.
+                </p>
               </div>
             </div>
           </motion.div>
