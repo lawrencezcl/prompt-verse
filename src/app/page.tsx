@@ -10,7 +10,7 @@ import { StatsOverview } from '@/components/analytics/stats-overview';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export const metadata: Metadata = {
-  title: 'PromptVerse - Ultimate AI Video Generation Prompts Collection',
+  title: 'PromptVerse - Ultimate AI Video Generation Prompts Collection | Updated Oct 2025',
   description: 'Discover 15,000+ professionally curated AI video generation prompts. Search, filter, and use the best prompts for Runway, Pika Labs, Sora, and more.',
   keywords: ['AI video prompts', 'text to video', 'AI video generation', 'Runway prompts', 'Pika Labs prompts', 'Sora prompts'],
   authors: [{ name: 'PromptVerse Team' }],
