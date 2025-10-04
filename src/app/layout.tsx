@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
+import { Analytics } from '@vercel/analytics/react';
 import { cn } from '@/lib/utils';
 import './globals.css';
 
@@ -37,6 +38,7 @@ export default function RootLayout({
               duration: 4000,
             }}
           />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
